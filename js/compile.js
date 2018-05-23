@@ -1,10 +1,15 @@
 var HandlebarsGenerator = require('handlebars-generator');
 const fs = require('fs')
 
-HandlebarsGenerator.registerSourceDirectory(__dirname + '/src');
-console.log(__dirname + '/src')
+var dirName = __dirname.split('/')
+dirName.pop()
+srcDir = dirName.join('/') + '/temp';
+tgtDir = dirName.join('/') + '/dist';
 
-var items = fs.readdirSync(__dirname + '/src')
+HandlebarsGenerator.registerSourceDirectory(srcDir);
+console.log(srcDir)
+
+var items = fs.readdirSync(srcDir)
 	console.log(items);
 
 for (var i = 0; i < items.length; i++) {
@@ -16,7 +21,7 @@ for (var i = 0; i < items.length; i++) {
 	}
 }
 
-HandlebarsGenerator.generatePages(__dirname + '/dist', {
+HandlebarsGenerator.generatePages(tgtDir, {
 	extension: 'html'
 }, function(err) {
 	if (err) console.error(err.message);

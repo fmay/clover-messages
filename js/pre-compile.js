@@ -4,8 +4,12 @@
 const { exec } = require('child_process');
 var fs = require('fs');
 
-var srcDir = __dirname + '/src/base-messages';
-var tempDir = __dirname + '/temp/base-messages';
+var dirName = __dirname.split('/')
+dirName.pop()
+dirName = dirName.join('/');
+
+var srcDir = dirName + '/src/base-messages';
+var tempDir = dirName + '/temp/base-messages';
 
 var filenames = fs.readdirSync(srcDir);
 
@@ -29,17 +33,17 @@ filenames.forEach(function (filename) {
 
 // Copy main html files to temp folder
 
-tempDir = __dirname + '/src';
+tempDir = dirName + '/src';
 
-var filenames = fs.readdirSync(srcDir);
+var filenames = fs.readdirSync(tempDir);
 
 filenames.forEach(function (filename) {
-	var matches = /^([^.]+).md$/.exec(filename);
+	var matches = /^([^.]+).html$/.exec(filename);
 	if (!matches) {
 		return;
 	}
 	var name = matches[1];
-  	eCmd = 'copy matches[1] ../temp';
+  	eCmd = 'cp ' + dirName + '/src/' + matches[1] + '.html ' + dirName + '/temp';
 	console.log(eCmd);  	
 	exec(eCmd, (err, stdout, stderr) => {
 		if (err) {
