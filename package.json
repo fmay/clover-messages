@@ -1,0 +1,20 @@
+{
+  "name": "cheat",
+  "version": "1.0.0",
+  "description": "",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack --config webpack.config.js",
+    "compile": "node md-compile.js && handlebars src/base-messages -f dist/load-base.js && handlebars src/domains/dm/data-migration.hbs -f dist-load-data-migration.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.11",
+    "handlebars-generator": "^3.2.2",
+    "lodash": "^4.17.10",
+    "require-handlebars-plugin": "^1.0.0"
+  }
+}
