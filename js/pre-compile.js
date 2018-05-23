@@ -1,55 +1,54 @@
+var util = require('./util.js');
+const {exec} = require('child_process');
 
-// Markdown compilation
 
-const { exec } = require('child_process');
-var fs = require('fs');
+// Cleanup and prepare
+util.prepBuild(util.getRootDir(), compileRest);
 
-var dirName = __dirname.split('/')
-dirName.pop()
-dirName = dirName.join('/');
 
-var srcDir = dirName + '/src/base-messages';
-var tempDir = dirName + '/temp/base-messages';
+function compileRest() {
 
-var filenames = fs.readdirSync(srcDir);
+	// Markdown compilation
 
-filenames.forEach(function (filename) {
-	var matches = /^([^.]+).md$/.exec(filename);
-	if (!matches) {
-		return;
+	var srcDir = util.getRootDir() + '/src';
+	var tempDir = util.getRootDir() + '/temp';
+
+	console.log("COMPILE MARKDOWN ...")
+
+	var matches = util.getFileNames(srcDir, '.md', false, true)
+	for(i=0; i<matches.length; i++) {
+	  	eCmd = 'marked -o ' + tempDir + '/' + matches[i] + '.html ' + srcDir + '/' + matches[i] + '.md'
+		exec(eCmd, (err, stdout, stderr) => {
+			if (err) {
+				// node couldn't execute the command
+				console.log("Error compiling markdown");
+			}  
+		});  
 	}
-	var name = matches[1];
-  	eCmd = 'marked -o ' + tempDir + '/' + matches[1] + '.html ' + srcDir + '/' + matches[1] + '.md'
-	console.log(eCmd);  	
-	exec(eCmd, (err, stdout, stderr) => {
-		if (err) {
-			// node couldn't execute the command
-			console.log("Error");
-			return;
-		}  
-	});  
-});
 
+	// Copy html files to temp folder
 
-// Copy main html files to temp folder
+	console.log("COPY MASTER HTML FILES ...")
 
-tempDir = dirName + '/src';
+	srcDir = util.getRootDir() + '/src';
+	tgtDir = util.getRootDir() + '/temp';
 
-var filenames = fs.readdirSync(tempDir);
+	var matches = util.getFileNames(srcDir, '.html', true, true)
+	console.log(matches)
 
-filenames.forEach(function (filename) {
-	var matches = /^([^.]+).html$/.exec(filename);
-	if (!matches) {
-		return;
+	for(i=0; i<matches.length; i++) {
+	  	eCmd = 'cp ' + srcDir + '/' + matches[i] + ' ' + tgtDir;
+		console.log(eCmd);
+		exec(eCmd, (err, stdout, stderr) => {
+			if (err) {
+				// node couldn't execute the command
+				console.log("Error");
+				return;
+			}  
+		});  
 	}
-	var name = matches[1];
-  	eCmd = 'cp ' + dirName + '/src/' + matches[1] + '.html ' + dirName + '/temp';
-	console.log(eCmd);  	
-	exec(eCmd, (err, stdout, stderr) => {
-		if (err) {
-			// node couldn't execute the command
-			console.log("Error");
-			return;
-		}  
-	});  
-});
+
+
+
+}
+

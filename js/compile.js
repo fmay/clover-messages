@@ -1,22 +1,21 @@
 var HandlebarsGenerator = require('handlebars-generator');
+var util = require('./util');
 const fs = require('fs')
 
-var dirName = __dirname.split('/')
-dirName.pop()
-srcDir = dirName.join('/') + '/temp';
-tgtDir = dirName.join('/') + '/dist';
+srcDir = util.getRootDir() + '/temp';
+tgtDir = util.getRootDir() + '/dist';
 
 HandlebarsGenerator.registerSourceDirectory(srcDir);
-console.log(srcDir)
+console.log('GENERATE HANDLEBARS OUTPUT ...')
 
 var items = fs.readdirSync(srcDir)
-	console.log(items);
+console.log(items)
 
 for (var i = 0; i < items.length; i++) {
 	var item = items[i]
 	if (item.indexOf('.html') !== -1) {
 		item = item.replace('.html', '');
-		console.log('add template item')
+		console.log(item);
 		HandlebarsGenerator.registerPage(item, item, {});
 	}
 }
