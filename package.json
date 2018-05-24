@@ -17,6 +17,7 @@
     "handlebars-generator": "^3.2.2",
     "lodash": "^4.17.10",
     "node-dir": "^0.1.17",
+    "npm": "^6.1.0",
     "require-handlebars-plugin": "^1.0.0"
   }
 }

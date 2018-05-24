@@ -28,20 +28,23 @@ for(i=0; i<files.length; i++) {
         contents = fs.readFileSync(files[i], 'utf8')
         hbsName = '{{>' + files[i].substring(files[i].indexOf(srcDir)+srcDir.length+1)
         hbsName = hbsName.substring(0, hbsName.lastIndexOf('.html')) + '}}'
-        txt = ""
-        $ = cheerio.load(contents)
-        $("p").each(function(index) {
-            txt += $(this).text() + '\n'
-        })
-        h1 = $("h1").text()
-        h2 = $("h2").text()
-        
-        // Add to output string
-        output = "<tr><td>" + hbsName + "</td>"
-        output += "<td>" + h1 + "</td>"
-        output += "<td>" + h2 + "</td>"
-        output += "<td>" + txt + "</td></tr>\n"
-        skel("table").append(output)        
+        // Don't include any root items or /temp
+        if(hbsName.indexOf('/') != -1) {
+            txt = ""
+            $ = cheerio.load(contents)
+            $("p, ul").each(function(index) {
+                txt += $(this).text() + '\n'
+            })
+            h1 = $("h1").text()
+            h2 = $("h2").text()
+            
+            // Add to output string
+            output = "<tr><td>" + hbsName + "</td>"
+            output += "<td>" + h1 + "</td>"
+            output += "<td>" + h2 + "</td>"
+            output += "<td>" + contents + "</td></tr>\n"
+            skel("table").append(output)        
+        }
     }
 }
 
