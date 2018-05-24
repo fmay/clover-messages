@@ -6,7 +6,7 @@
   "scripts": {
     "precompile": "node js/pre-compile.js",
     "compile": "node js/compile.js",
-    "postcompile": "echo 'DONE'"
+    "postcompile": "node js/ref-table.js echo 'DONE'"
   },
   "keywords": [],
   "author": "",
