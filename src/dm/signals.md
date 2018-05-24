@@ -1,3 +1,7 @@
+<!-- DM Basics : Signals & Drivers -->
+
+# Signals and drivers
+
 - Mergers &amp; Acquisitions (Unifying alien worlds and IT stacks under one roof)
 - Consolidation of application, reducing complexity of IT stack, house-cleaning
 - Modernization (replacing low performing or low feature apps with newer ones)
