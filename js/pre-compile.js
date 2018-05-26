@@ -1,17 +1,17 @@
-var util = require('./util.js');
-const {exec} = require('child_process');
+var util = require('./util.js')
+const {exec} = require('child_process')
 
 
 // Cleanup and prepare
-util.prepBuild(util.getRootDir(), compileRest);
+util.prepBuild(util.getRootDir(), compileRest)
 
 
 function compileRest() {
 
 	// Markdown compilation
 
-	var srcDir = util.getRootDir() + '/src';
-	var tempDir = util.getRootDir() + '/temp';
+	var srcDir = util.getRootDir() + '/src'
+	var tempDir = util.getRootDir() + '/temp'
 
 	console.log("COMPILE MARKDOWN ...")
 
@@ -21,7 +21,7 @@ function compileRest() {
 		exec(eCmd, (err, stdout, stderr) => {
 			if (err) {
 				// node couldn't execute the command
-				console.log("Error compiling markdown");
+				console.log("Error compiling markdown")
 			}  
 		});  
 	}
@@ -30,20 +30,20 @@ function compileRest() {
 
 	console.log("COPY MASTER HTML FILES ...")
 
-	srcDir = util.getRootDir() + '/src';
-	tgtDir = util.getRootDir() + '/temp';
+	srcDir = util.getRootDir() + '/src'
+	tgtDir = util.getRootDir() + '/temp'
 
 	var matches = util.getFileNames(srcDir, '.html', true, true)
 	console.log(matches)
 
 	for(i=0; i<matches.length; i++) {
-	  	eCmd = 'cp ' + srcDir + '/' + matches[i] + ' ' + tgtDir;
-		console.log(eCmd);
+	  	eCmd = 'cp ' + srcDir + '/' + matches[i] + ' ' + tgtDir
+		console.log(eCmd)
 		exec(eCmd, (err, stdout, stderr) => {
 			if (err) {
 				// node couldn't execute the command
-				console.log("Error");
-				return;
+				console.log("Error")
+				return
 			}  
 		});  
 	}
