@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Cheat Sheet Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/ref.css">
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+   
+      
   </head>
   <body>
     <h1>Cheat Sheet - Cheet Sheet</h1>
@@ -11,3 +17,14 @@
     </table>
   </body>
 </html>
+
+<script>
+  $(".template-field").click(function () {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    alert("Copied to clipboard!")
+  });
+</script>

@@ -1,4 +1,4 @@
-# Finance
+# Banking and Finance
 ## Reducing operating costs by 42% by migrating legacy systems to a new ERP
 
 ### A major financial and leasing provider successfully deployed a CloverETL data migration solution to cleanse and consolidate AS/400 and Dynamics NAV legacy systems to ERP, increasing processing speed by one-third and significantly reducing annual operating costs.

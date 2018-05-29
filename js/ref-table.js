@@ -39,7 +39,7 @@ for(i=0; i<files.length; i++) {
             h2 = $("h2").text()
             
             // Add to output string
-            output = "<tr><td>" + hbsName + "</td>"
+            output = '<tr><td><p class="template-field">' + hbsName + '</p></td>'
             output += "<td>" + h1 + "</td>"
             output += "<td>" + h2 + "</td>"
             output += "<td>" + contents + "</td></tr>\n"

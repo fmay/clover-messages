@@ -1,87 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Cheat Sheet Reference</title>
+	<link rel="stylesheet" type="text/css" href="../css/cheat.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>   
+	<script type="text/javascript" src="../js/cheat.js"></script>         
+</head>
+			
+<body>
 
+<div class="car">
+
+		<div class="cs-block-normal">
+
+				<h1>Know your basics</h1>
+		
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/definition}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/signals}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/typical-approaches}}
+					</div>
+				</div>
+				<div class="cs-block-item-special">
+					<div class="cs-block-subitem">
+						{{>dm/key-messages}}
+					</div>
+				</div>
+		
+			</div>
+			
+			<div class="cs-block-normal"> 
+		
+				<h1>Where we fit</h1>
+		
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/tailored-complex}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/tight-deadlines}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>dm/messy}}
+					</div>
+				</div>
+				<div class="cs-block-item-special">
+					<div class="cs-block-subitem">
+						{{>dm/component-only}}
+					</div>
+				</div>
+		
+			</div>
+		
+		
+		
+			<div class="cs-block-case-studies">
+				<h1>Case Studies</h1>		
+				<div class="cs-case-study">
+					{{>case-studies/finance-qq}}
+				</div>
+				<div class="cs-case-study">
+					{{>case-studies/software-qq}}
+				</div>		
+			</div>
+		
+
+			<div>
+				Another section
+					
+			</div>
+
+			<div>And another</div>
+
+			<div>Last one</div>
+
+
+</div>
 
 <div class="cs-container">
 
 	<img src="../img/CloverDX-logo.png" width="300">
 
-	<div class="cs-block-normal">
-
-		<div class="cs-block-title">
-			Know your basics
-		</div>
-
-		<div class="cs-block-item">
-			Definition
-			<div class="cs-block-subitem">
-				{{>dm/definition}}
-			</div>
-		</div>
-		<div class="cs-block-item">
-			Signals &amp; Drivers
-			<div class="cs-block-subitem">
-				{{>dm/signals}}
-			</div>
-		</div>
-		<div class="cs-block-item">
-			2 Typical approaches
-			<div class="cs-block-subitem">
-				{{>dm/typical-approaches}}
-			</div>
-		</div>
-		<div class="cs-block-item-special">
-			Key Messages
-			<div class="cs-block-subitem">
-				{{>dm/key-messages}}
-			</div>
-		</div>
-
-	</div>
-
-	<h1>Where we fit</h1>
-	
-	<div class="cs-block-normal">
-
-		<div class="cs-block-title">
-			Where we fit
-		</div>
-
-		<div class="cs-block-item">
-			Tailored &amp; complex solutions
-			<div class="cs-block-subitem">
-				{{>dm/tailored-complex}}
-			</div>
-		</div>
-		<div class="cs-block-item">
-			Extremely tight deadlines
-			<div class="cs-block-subitem">
-				{{>dm/tight-deadlines}}
-			</div>
-		</div>
-		<div class="cs-block-item">
-			Messy data
-			<div class="cs-block-subitem">
-				{{>dm/messy}}
-			</div>
-		</div>
-		<div class="cs-block-item-special">
-			Migration only one component
-			<div class="cs-block-subitem">
-				{{>dm/component-only}}
-			</div>
-		</div>
-
-	</div>
-
-	<h1>Case Studies</h1>
-
-	<div class="cs-block-case-studies">
-		<div class="cs-case-study">
-			{{>case-studies/finance-qq}}
-		</div>
-		<div class="cs-case-study">
-			{{>case-studies/software-qq}}
-		</div>		
-	</div>
 
 </div>
+
+</body>
+
+
+</html>
 
