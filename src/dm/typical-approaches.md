@@ -1,6 +1,6 @@
 <!-- DM Basics : 2 typical approaches to data migration -->
 
-# 2 Typical Approaches
+# Two Typical Approaches
 
 ## Big Bang
 ### Advantages

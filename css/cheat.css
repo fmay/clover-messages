@@ -1,29 +1,26 @@
 
+h1.slide-title {
+    font-size: 1.5em;
+    font-weight: 800;
+}
 
 h1 {
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-top:1px solid rgb(217, 217, 217);
 }
 
 h2 {
-    font-size: 1.0em;
-    font-weight: bold;    
+    font-size: 1.1em;
+    font-weight: 600;    
 }
 
 h3 {
     font-size: 0.9em;
-    font-weight: bold;    
+    font-weight: 600;    
 }
 
 p, li {
     font-size: 1em;
     font-weight: 400;
-}
-
-.template-field {
-    font-weight: 800;
-}
-
-tr:nth-child(even) {
-    background: #EEE
 }

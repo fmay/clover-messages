@@ -1,3 +1,10 @@
+<!-- METADATA
+Sector : Finance
+Status : Current
+Updated : 2018-05-29 14:00:00
+PubItem : this
+--> 
+
 # Banking and Finance
 ## Reducing operating costs by 42% by migrating legacy systems to a new ERP
 
@@ -11,3 +18,4 @@ Contending with more than 27 million records, the company needed to solve their 
 - Modern ERP system reduces the company’s operating costs by 42% annually
 
 <a href="http://example.com/" target="_blank">Open case study</a>
+
