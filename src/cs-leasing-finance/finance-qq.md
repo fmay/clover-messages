@@ -1,10 +1,3 @@
-<!-- METADATA
-Sector : Finance
-Status : Current
-Updated : 2018-05-29 14:00:00
-PubItem : this
---> 
-
 # Banking and Finance
 ## Reducing operating costs by 42% by migrating legacy systems to a new ERP
 

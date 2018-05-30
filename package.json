@@ -5,7 +5,7 @@
   "private": "true",
   "scripts": {
     "cleanup": "node js/cleanup.js",
-    "watch": "watch 'npm run compile' src/",    
+    "watch": "watch 'npm run compile' src/",
     "precompile": "node js/pre-compile.js",
     "compile": "node js/compile.js",
     "postcompile": "node js/ref-table.js echo 'DONE'"
@@ -15,12 +15,15 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "debug": "^3.1.0",
     "handlebars": "^4.0.11",
     "handlebars-generator": "^3.2.2",
     "lodash": "^4.17.10",
     "node-dir": "^0.1.17",
     "node-sass": "^4.9.0",
     "npm": "^6.1.0",
-    "require-handlebars-plugin": "^1.0.0"
+    "require-handlebars-plugin": "^1.0.0",
+    "winston": "^2.4.2",
+    "write-json-file": "^2.3.0"
   }
 }
