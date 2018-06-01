@@ -51,6 +51,7 @@ function validateMetadata(data, dirName) {
 
 	// Validate key/value settings
 	_validationError = false;
+	tObj.rootName = obj.pubItem.substring(0, obj.pubItem.lastIndexOf('.'))
 	tObj.sectorTags = validateValue(obj.sectorTags, "string", [], "", "sectorTags")
 	tObj.desc = validateValue(obj.desc, "string", [], "undefined", "desc")
 	tObj.status = validateValue(obj.status, "string", validStatusArray, "undefined", "status")
@@ -69,9 +70,11 @@ function validateMetadata(data, dirName) {
 		if ( matches[i].includes('.md') ) {
 			tObj.mdSnippet = true
 			tObj.pubItemUse = 'snippet'
-			tObj.pubItem = matches[i].substring(matches[i].lastIndexOf('/') + 1)
 			tObj.pubItem = tObj.pubItem.substring(0, tObj.pubItem.lastIndexOf('.')) + '.html'
-			tObj.srcFileName = tObj.pubItem.substring(0, tObj.pubItem.lastIndexOf('.')) + '.md'
+			var name = matches[i].substring(matches[i].lastIndexOf('/') + 1)
+			name = name.substring(0, name.lastIndexOf('.'))
+			tObj.srcFileName = name + '.md'
+			tObj.rootName = name
 			tObj.isTemplateComponent = true;
 			break
 		}
@@ -121,16 +124,13 @@ function compileRest() {
 	writeJsonFile(tempDir + '/metamaster.json', metaMaster).then(() => {
 		winston.info('Written metamaster.json');
 	});
-	writeJsonFile(distDir + '/metamaster.json', metaMaster).then(() => {
-		winston.info('Written metamaster.json');
-	});
 	winston.info("COMPILE MARKDOWN ...")
 
 	// Iterate through the metamaster.json file, compiling any markdown files directly to /temp
 	for(i=0; i<metaMaster.length; i++) {
 		if(metaMaster[i].mdSnippet) {
 			winston.debug("MD compile %s", metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName)
-			var eCmd = 'marked -o ' + tempDir  + '/' + metaMaster[i].srcFileName.substring(0, metaMaster[i].srcFileName.lastIndexOf('.md')) + '.hbp ' + metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName 
+			var eCmd = 'marked -o ' + tempDir  + '/' + metaMaster[i].rootName + '.hbp ' + metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName 
 			exec(eCmd, (err, stdout, stderr) => {
 				if (err) {
 					// node couldn't execute the command
@@ -146,7 +146,7 @@ function compileRest() {
 					eCmd = 'cp ' + metaMaster[i].srcDir + '/' + metaMaster[i].pubItem.substring(0, metaMaster[i].pubItem.lastIndexOf('.')) + '.hbm ' + tempDir
 				}
 				else {
-					eCmd = 'cp ' + metaMaster[i].srcDir + '/' + metaMaster[i].pubItem + ' ' + distDir
+					eCmd = 'cp ' + metaMaster[i].srcDir + '/' + metaMaster[i].pubItem + ' ' + tempDir
 				}
 				winston.verbose(eCmd)
 				exec(eCmd, (err, stdout, stderr) => {

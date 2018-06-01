@@ -23,6 +23,14 @@
     </div>    
     
     <table id="ref-table">
+        {{#each this}}
+            <tr>
+                <td>{{desc}}</td>
+                <td>{{h1}}</td>
+                <td>{{h2}}</td>
+            </tr>
+            <li>{{this}}</li>
+        {{/each}}
     </table>
   </body>
 </html>

@@ -19,7 +19,13 @@
             "program": "${workspaceFolder}/js/pre-compile.js",
             "outputCapture": "std"
         },
-
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Compile",
+            "program": "${workspaceFolder}/js/compile.js",
+            "outputCapture": "std"
+        },
         {
             "type": "node",
             "request": "launch",
@@ -32,13 +38,6 @@
             "request": "launch",
             "name": "ref.html",
             "program": "${workspaceFolder}/js/ref-table.js",
-            "outputCapture": "std"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Template Compile",
-            "program": "${workspaceFolder}/js/compile.js",
             "outputCapture": "std"
         }
         
