@@ -5,24 +5,24 @@ const {exec} = require('child_process')
 const fs = require('fs')
 const writeJsonFile = require('write-json-file');
  
-
 // Validation settings
 var validStatusArray = ['current', 'archived', 'refresh']
-var validPubItemTypeArray = ['file', 'url']
+var validPubItemTypeArray = ['file', 'url', 'image', 'pdf']
+var validPubItemUseArray = ['doc', 'white paper', 'case study', 'presentation', 'video', 'webinar', 'one pager', 'pr', 'ebook', 'infosheet', 'snippet']
 var _validationError
 
 // Initialize logging
 winston.level='debug'
 
 // Cleanup and prepare
-winston.info("Calling cleanup ...")
-winston.debug("111")
+winston.info("Cleaning up /temp and /dist ...")
 util.prepBuild(util.getRootDir(), compileRest)
 
-function validateValue(value, checkType, validArray, defVal) {
+function validateValue(value, checkType, validArray, defVal, label) {
 
 	if( value == undefined || typeof(value) != checkType || ( validArray.length >0 && validArray.indexOf(value) == -1 )) {
 		validationError = true;
+		winston.verbose('Validation error : %s', label )
 		return defVal
 	}
 	else {
@@ -44,32 +44,44 @@ function validateMetadata(data, dirName) {
 	}
 	catch(err) {
 		// Bad metadata, so generate a warning
-		winston.debug("Cannot parse metadata")
+		winston.error("Cannot parse metadata")
 		tObj.validationError = true;
 		return tObj
 	}
 
 	// Validate key/value settings
 	_validationError = false;
-	tObj.sectorTags = validateValue(obj.sectorTags, "string", [], "")
-	tObj.status = validateValue(obj.status, "string", validStatusArray, "undefined")
-	tObj.updated = validateValue(obj.updated, "string", [], "")
-	tObj.pubItemType = validateValue(obj.pubItemType, "string", validPubItemTypeArray, "undefined")
-	tObj.pubItem = validateValue(obj.pubItem, "string", [], "undefined")
-	tObj.UCDomainTags = validateValue(obj.UCDomainTags, "string", [], "")
-	tObj.generalTags = validateValue(obj.generalTags, "string", [], "")
+	tObj.sectorTags = validateValue(obj.sectorTags, "string", [], "", "sectorTags")
+	tObj.desc = validateValue(obj.desc, "string", [], "undefined", "desc")
+	tObj.status = validateValue(obj.status, "string", validStatusArray, "undefined", "status")
+	tObj.updated = validateValue(obj.updated, "string", [], "", "updated")
+	tObj.pubItemUse = validateValue(obj.pubItemUse, "string", validPubItemUseArray, "undefined", "pubItemUse")
+	tObj.pubItemType = validateValue(obj.pubItemType, "string", validPubItemTypeArray, "undefined", "pubItemType")
+	tObj.pubItem = validateValue(obj.pubItem, "string", [], "undefined", "pubItem")
+	tObj.srcFileName = validateValue(obj.srcFileName, "string", [], "undefined", "srcFileName")
+	tObj.UCDomainTags = validateValue(obj.UCDomainTags, "string", [], "", "UCDomainTags")
+	tObj.generalTags = validateValue(obj.generalTags, "string", [], "", "generalTags")
+	tObj.isTemplateMaster = validateValue(obj.isTemplateMaster, "boolean", [], false, "isTemplateMaster")
+	tObj.isTemplateComponent = validateValue(obj.isTemplateComponent, "boolean", [], false, "isTemplateComponent")
 	tObj.validationError = _validationError
 	var matches = dirfn.files(dirName,  {sync:true, recursive: false})
 	for(i=0, tObj.mdSnippet = false; i<matches.length; i++ ) {
 		if ( matches[i].includes('.md') ) {
 			tObj.mdSnippet = true
-			tObj.srcFileName = matches[i].substring(matches[i].lastIndexOf('/') + 1)
+			tObj.pubItemUse = 'snippet'
+			tObj.pubItem = matches[i].substring(matches[i].lastIndexOf('/') + 1)
+			tObj.pubItem = tObj.pubItem.substring(0, tObj.pubItem.lastIndexOf('.')) + '.html'
+			tObj.srcFileName = tObj.pubItem.substring(0, tObj.pubItem.lastIndexOf('.')) + '.md'
+			tObj.isTemplateComponent = true;
 			break
 		}
 	}
+	if(!tObj.mdSnippet) {
+		tObj.srcFileName = validateValue(obj.srcFileName, "string", [], "undefined", "srcFileName")	
+	}
 
 	if(_validationError) {
-		winston.debug("Partially incorrect metadata")
+		winston.error("Partially incorrect metadata")
 	}
 	return tObj
 
@@ -81,6 +93,7 @@ function compileRest() {
 
 	var srcDir = util.getRootDir() + '/src'
 	var tempDir = util.getRootDir() + '/temp'
+	var distDir = util.getRootDir() + '/dist'
 	var metaMaster = []
 	var i;
 
@@ -99,54 +112,53 @@ function compileRest() {
 			metaMaster.push(validateMetadata(contents, matches[i]))
 		}
 		catch(error) {
-			winston.debug('Error reading metadata from : %s', matches[i])
+			winston.error('Error reading metadata from : %s', matches[i])
 		}
 				  
 	}
 
 	// Write metamaster.json 
 	writeJsonFile(tempDir + '/metamaster.json', metaMaster).then(() => {
-		winston.debug('Written metamaster.json');
+		winston.info('Written metamaster.json');
 	});
+	writeJsonFile(distDir + '/metamaster.json', metaMaster).then(() => {
+		winston.info('Written metamaster.json');
+	});
+	winston.info("COMPILE MARKDOWN ...")
 
-	winston.log("COMPILE MARKDOWN ...")
-
-	// Iterate through the metamaster.json file, compiling any markdown files
+	// Iterate through the metamaster.json file, compiling any markdown files directly to /temp
 	for(i=0; i<metaMaster.length; i++) {
 		if(metaMaster[i].mdSnippet) {
 			winston.debug("MD compile %s", metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName)
-			var eCmd = 'marked -o ' + tempDir  + '/' + metaMaster[i].srcFileName.substring(0, metaMaster[i].srcFileName.lastIndexOf('.md')) + '.html ' + metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName 
+			var eCmd = 'marked -o ' + tempDir  + '/' + metaMaster[i].srcFileName.substring(0, metaMaster[i].srcFileName.lastIndexOf('.md')) + '.hbp ' + metaMaster[i].srcDir + '/' + metaMaster[i].srcFileName 
 			exec(eCmd, (err, stdout, stderr) => {
 				if (err) {
 					// node couldn't execute the command
-					console.log("Error compiling markdown")
-				}  
+					winston.error("Error compiling markdown")
+				}
 			});  
 		}
+		else { 
+			// Copy the pubItem file to /dist
+			if(metaMaster[i].pubItem && metaMaster[i].pubItem!='undefined') {
+				// If a template master, then copy to /temp
+				if(metaMaster[i].isTemplateMaster) {
+					eCmd = 'cp ' + metaMaster[i].srcDir + '/' + metaMaster[i].pubItem.substring(0, metaMaster[i].pubItem.lastIndexOf('.')) + '.hbm ' + tempDir
+				}
+				else {
+					eCmd = 'cp ' + metaMaster[i].srcDir + '/' + metaMaster[i].pubItem + ' ' + distDir
+				}
+				winston.verbose(eCmd)
+				exec(eCmd, (err, stdout, stderr) => {
+					if (err) {
+						// node couldn't execute the command
+						winston.error(err.message)
+						return
+					}  
+				});  
+			}
+		}
 	}
-return
-	// Copy html files to temp folder
-
-	console.log("COPY MASTER HTML FILES ...")
-
-	srcDir = util.getRootDir() + '/src'
-	tgtDir = util.getRootDir() + '/temp'
-
-	var matches = util.getFileNames(srcDir, '.html', true, true)
-	console.log(matches)
-
-	for(i=0; i<matches.length; i++) {
-	  	eCmd = 'cp ' + srcDir + '/' + matches[i] + ' ' + tgtDir
-		console.log(eCmd)
-		exec(eCmd, (err, stdout, stderr) => {
-			if (err) {
-				// node couldn't execute the command
-				console.log("Error")
-				return
-			}  
-		});  
-	}
-
 
 
 }

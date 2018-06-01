@@ -1,8 +1,10 @@
 {
+    "desc": "A case study about finance",
     "sectorTags" : "finance banking",
     "status" : "current",
     "mdSnippet": true,
     "updated": "2018-05-29 14:00:00",
+    "pubItemUse": "snippet",
     "pubItemType": "file",
     "pubItem": "this",
     "UCDomainTags": "data migration",

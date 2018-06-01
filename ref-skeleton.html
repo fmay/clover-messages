@@ -8,17 +8,47 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
       
   </head>
   <body>
     <h1>Cheat Sheet - Cheet Sheet</h1>
-    <table>
+    <button id="all" type="button">Show All</button>    
+    <button id="component" type="button">Template Components</button>    
+    <button id="master" type="button">Template Masters</button>    
+    <button id="asset" type="button">Assets</button>    
+    <button id="image" type="button">Images</button> 
+    <div class="form-group form-inline">
+        <input type="text" class="form-control" id="searchTextbox" placeholder="Search text">
+    </div>    
+    
+    <table id="ref-table">
     </table>
   </body>
 </html>
 
 <script>
+
+var _mm
+
+$( document ).ready(function() {
+
+  var url = window.location.href
+  url = url.substring(0, url.lastIndexOf('/')) + '/metamaster.json'
+  $.getJSON( url, function( data ) {
+    _mm = JSON.parse(data)
+  });
+ 
+
+});  
+
+$( "#searchTextbox" ).keypress(function( event ) {
+  if ( event.which == 13 ) {
+     //code here
+     //13 represents Enter key
+  }
+});
+
   $(".template-field").click(function () {
     var $temp = $("<input>");
     $("body").append($temp);
@@ -26,5 +56,30 @@
     document.execCommand("copy");
     $temp.remove();
     alert("Copied to clipboard!")
+  });
+
+  $("#all").click(function () {
+    // Show all
+    $("#ref-table tr").show();
+  });
+  $("#asset").click(function () {
+    // Only show assets
+    $("#ref-table tr").hide();
+    $("#ref-table tr.cs-asset").show();
+  });
+  $("#component").click(function () {
+    // Only show template components
+    $("#ref-table tr").hide();
+    $("#ref-table tr.cs-template-component").show();
+  });
+  $("#master").click(function () {
+    // Only show masters
+    $("#ref-table tr").hide();
+    $("#ref-table tr.cs-template-master").show();
+  });
+  $("#image").click(function () {
+    // Only show masters
+    $("#ref-table tr").hide();
+    $("#ref-table tr.cs-image").show();
   });
 </script>

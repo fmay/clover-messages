@@ -65,7 +65,9 @@ module.exports = {
 				}  
 			});  
 
-
+		callback()
+		return
+		
 		// Get a list of all subdirs
 		dirfn.subdirs(dir + '/src', function(err, subs) {
 		    if (err) throw err

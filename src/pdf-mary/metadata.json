@@ -1,11 +1,11 @@
 {
-    "sectorTagsx" : "finance banking",
+    "sectorTags" : "finance banking",
     "status" : "current",
-    "mdSnippet": false,
     "updated": "2018-05-29 14:00:00",
-    "pubType": "file",
-    "pubItem": "data-migration.html",
+    "pubItemType": "file",
+    "mdSnippet": true,
+    "pubItem": "Mary.pdf",
     "UCDomainTags": "data migration",
     "generalTags" : "leasing migration erp legacy AS400 cost saving",
-    "isTemplateMaster": true
+    "srcFileName": "Mary had a little lamb.docx"
 }

@@ -15,22 +15,32 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Precompile",
+            "name": "Precompile",
             "program": "${workspaceFolder}/js/pre-compile.js",
+            "outputCapture": "std"
         },
 
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Cleanup",
+            "name": "Cleanup",
             "program": "${workspaceFolder}/js/cleanup.js",
-        },
-        
+            "outputCapture": "std"
+        },        
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "ref.html",
             "program": "${workspaceFolder}/js/ref-table.js",
+            "outputCapture": "std"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Template Compile",
+            "program": "${workspaceFolder}/js/compile.js",
+            "outputCapture": "std"
         }
+        
     ]
 }

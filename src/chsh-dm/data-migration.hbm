@@ -22,22 +22,22 @@
 		
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/definition}}
+						{{>definition}}
 					</div>
 				</div>
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/signals}}
+						{{>signals}}
 					</div>
 				</div>
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/typical-approaches}}
+						{{>typical-approaches}}
 					</div>
 				</div>
 				<div class="cs-block-item-special">
 					<div class="cs-block-subitem">
-						{{>dm/key-messages}}
+						{{>key-messages}}
 					</div>
 				</div>
 		
@@ -49,22 +49,22 @@
 		
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/tailored-complex}}
+						{{>tailored-complex}}
 					</div>
 				</div>
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/tight-deadlines}}
+						{{>tight-deadlines}}
 					</div>
 				</div>
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>dm/messy}}
+						{{>messy}}
 					</div>
 				</div>
 				<div class="cs-block-item-special">
 					<div class="cs-block-subitem">
-						{{>dm/component-only}}
+						{{>component-only}}
 					</div>
 				</div>
 		
@@ -75,10 +75,10 @@
 			<div class="cs-block-case-studies">
 				<h1 class="slide-title">Case Studies</h1>		
 				<div class="cs-case-study">
-					{{>case-studies/finance-qq}}
+					{{>finance-qq}}
 				</div>
 				<div class="cs-case-study">
-					{{>case-studies/software-qq}}
+					{{>software-qq}}
 				</div>		
 			</div>
 		
