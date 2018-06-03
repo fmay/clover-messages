@@ -22,78 +22,29 @@
 		
 				<div class="cs-block-item">
 					<div class="cs-block-subitem">
-						{{>definition}}
+						{{>auto-testing}}
 					</div>
 				</div>
 				<div class="cs-block-item">
-					<div class="cs-block-subitem">
-						{{>signals}}
-					</div>
-				</div>
-				<div class="cs-block-item">
-					<div class="cs-block-subitem">
-						{{>typical-approaches}}
-					</div>
-				</div>
-				<div class="cs-block-item-special">
-					<div class="cs-block-subitem">
-						{{>key-messages}}
-					</div>
-				</div>
-		
-			</div>
-			
-			<div class="cs-block-normal"> 
-		
-				<h1 class="slide-title">Where we fit</h1>
-		
-				<div class="cs-block-item">
-					<div class="cs-block-subitem">
-						{{>tailored-complex}}
-					</div>
-				</div>
-				<div class="cs-block-item">
-					<div class="cs-block-subitem">
-						{{>tight-deadlines}}
-					</div>
-				</div>
-				<div class="cs-block-item">
-					<div class="cs-block-subitem">
-						{{>messy}}
-					</div>
-				</div>
-				<div class="cs-block-item-special">
 					<div class="cs-block-subitem">
 						{{>component-only}}
 					</div>
 				</div>
 		
-			</div>
-		
-		
-		
-			<div class="cs-block-case-studies">
-				<h1 class="slide-title">Case Studies</h1>		
-				<div class="cs-case-study">
-					{{>finance-qq}}
-				</div>
-				<div class="cs-case-study">
-					{{>software-qq}}
-				</div>		
-			</div>
-		
+		</div>
+			
 
-			<div>
-				<h1 class="slide-title">Another section</h1>
-			</div>
+		<div>
+			<h1 class="slide-title">Another section</h1>
+		</div>
 
-			<div>
-				<h1 class="slide-title">And another</h1>
-			</div>
+		<div>
+			<h1 class="slide-title">And another</h1>
+		</div>
 
-			<div>
-				<h1 class="slide-title">Last one</h1>
-			</div>
+		<div>
+			<h1 class="slide-title">Last one</h1>
+		</div>
 
 
 </div>

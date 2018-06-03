@@ -1,11 +1,12 @@
 {
-    "sectorTags" : "finance banking",
+    "desc": "Mary had a lamb you know",
+    "sectorTags" : "Logistics Shipping",
     "status" : "current",
     "updated": "2018-05-29 14:00:00",
-    "pubItemType": "file",
-    "mdSnippet": true,
+    "mdSnippet": false,
     "pubItem": "Mary.pdf",
-    "UCDomainTags": "data migration",
-    "generalTags" : "leasing migration erp legacy AS400 cost saving",
+    "pubItemUse": "pdf",
+    "UCDomainTags": "bi analytics",
+    "generalTags" : "logistics shiping overview document",
     "srcFileName": "Mary had a little lamb.docx"
 }

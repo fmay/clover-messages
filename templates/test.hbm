@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Cheat Sheet Reference</title>
-    <link rel="stylesheet" type="text/css" href="css/ref.css">
+    <link rel="stylesheet" type="text/css" href="../css/ref.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
   </head>
@@ -11,27 +11,16 @@
   <body>
     <h1>Cheat Sheet - Cheet Sheet</h1>
     <div class="form-group form-inline">
-      <form action="/ref/" method="GET">
-        <input id="all" type="checkbox">Everywhere
-        <input id="sector" type="checkbox">Sector
-        <input id="Description" type="checkbox">Description
-        <select> 
-          {{#each uses}}
-            <option value="">{{this}}</option> 
-          {{/each}}
-        </select>
         <input type="text" class="form-control" id="searchTextbox" placeholder="Search text">
-      </form>
     </div>    
     
     <table id="ref-table">
-        {{#each mm}}
+        {{#each this}}
             <tr>
-                <td>{{{link}}}</td>
-                <td>{{pubItemUse}}</td>
+                <td>{{pubItem}}</td>
                 <td>{{desc}}</td>
-                <td><h1>{{h1}}</h1></br><h2>{{h2}}</h2></td>
-                <td>{{{text}}} {{{image}}}</td>
+                <td>{{h1}}</br>{{h2}}</td>
+                <td>{{text}}</td>
             </tr>
         {{/each}}
     </table>
@@ -48,7 +37,6 @@ $( document ).ready(function() {
 
 $( "#searchTextbox" ).keypress(function( event ) {
   if ( event.which == 13 ) {
-    alert("13")
      //code here
      //13 represents Enter key
   }

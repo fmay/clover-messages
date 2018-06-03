@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Data Migration</title>
+	<link rel="stylesheet" type="text/css" href="../css/cheat.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>   
+	<script type="text/javascript" src="../js/cheat.js"></script>         
+</head>
+			
+<body>
+
+<img src="../img/CloverDX-logo.png" width="300">
+
+<div class="car">
+
+		<div class="cs-block-normal">
+
+				<h1 class="slide-title">Know your basics</h1>
+		
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>definition}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>signals}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>typical-approaches}}
+					</div>
+				</div>
+				<div class="cs-block-item-special">
+					<div class="cs-block-subitem">
+						{{>key-messages}}
+					</div>
+				</div>
+		
+			</div>
+			
+			<div class="cs-block-normal"> 
+		
+				<h1 class="slide-title">Where we fit</h1>
+		
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>tailored-complex}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>tight-deadlines}}
+					</div>
+				</div>
+				<div class="cs-block-item">
+					<div class="cs-block-subitem">
+						{{>messy}}
+					</div>
+				</div>
+				<div class="cs-block-item-special">
+					<div class="cs-block-subitem">
+						{{>component-only}}
+					</div>
+				</div>
+		
+			</div>
+		
+		
+		
+			<div class="cs-block-case-studies">
+				<h1 class="slide-title">Case Studies</h1>		
+				<div class="cs-case-study">
+					{{>finance-qq}}
+				</div>
+				<div class="cs-case-study">
+					{{>software-qq}}
+				</div>		
+			</div>
+		
+
+			<div>
+				<h1 class="slide-title">Another section</h1>
+			</div>
+
+			<div>
+				<h1 class="slide-title">And another</h1>
+			</div>
+
+			<div>
+				<h1 class="slide-title">Last one</h1>
+			</div>
+
+
+</div>
+
+<div class="cs-container">
+
+	<img src="../img/CloverDX-logo.png" width="300">
+
+</div>
+
+</body>
+
+
+</html>
+

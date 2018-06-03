@@ -1,12 +1,11 @@
 {
-    "desc": "A cute image of a lamb and a duck",
     "sectorTags" : "Animals",
     "status" : "current",
     "updated": "2018-05-29 14:00:00",
+    "pubItemType": "image",
     "mdSnippet": false,
     "pubItem": "lamb_duck.jpg",
-    "pubItemUse": "image",
     "UCDomainTags": "data migration",
-    "generalTags" : "A cute image of a lamb and a duck",
+    "generalTags" : "lamb duck",
     "srcFileName": "lamb_duck.jpg"
 }

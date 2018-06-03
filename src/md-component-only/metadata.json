@@ -1,8 +1,9 @@
 {
+    "desc": "",
     "sectorTags" : "finance banking",
     "status" : "current",
     "updated": "2018-05-29 14:00:00",
-    "pubItemType": "file",
+    "pubItemUse": "snippet",
     "mdSnippet": true,
     "pubItem": "this",
     "UCDomainTags": "data migration",

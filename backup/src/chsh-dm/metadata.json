@@ -1,12 +1,11 @@
 {
-    "desc": "Info Sheet Data Migration",
-    "sectorTags" : "all any",
+    "sectorTagsx" : "finance banking",
     "status" : "current",
     "mdSnippet": false,
     "updated": "2018-05-29 14:00:00",
+    "pubType": "file",
     "pubItem": "data-migration.html",
-    "pubItemUse" : "info sheet",
     "UCDomainTags": "data migration",
-    "generalTags" : "Info sheet on data migration",
+    "generalTags" : "leasing migration erp legacy AS400 cost saving",
     "isTemplateMaster": true
 }

@@ -1,0 +1,13 @@
+{
+    "desc": "Getting started video",
+    "sectorTags" : "",
+    "status" : "current",
+    "updated": "2018-05-29 14:00:00",
+    "mdSnippet": false,
+    "pubItem": "",
+    "pubItemUse": "video",
+    "UCDomainTags": "product",
+    "generalTags" : "product video tutorial",
+    "srcFileName": "",
+    "text": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/R3bijOFbjyU\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
+}

@@ -5,7 +5,17 @@
 var dirfn = require('node-dir')
 const {exec} = require('child_process');
 
+// Validation settings
+var _validStatusArray = ['current', 'archived', 'refresh']
+var _validPubItemUseArray = ['doc', 'pdf', 'white paper', 'case study', 'presentation', 'video', 'webinar', 'one pager', 'pr', 'ebook', 'info sheet', 'snippet', 'image']
+var _validationError
+
+
 module.exports = {
+
+	validStatusArray : _validStatusArray,
+	validPubItemUseArray : _validPubItemUseArray,
+
 
   	getFileNames: 
 

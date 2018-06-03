@@ -11,6 +11,27 @@ var _mm
 
 winston.level = 'debug'
 
+// Register helpers
+
+// Insert image tag
+hb.registerHelper('image', function(object) {
+    var el = object.data.root.mm[object.data.index]
+    if(el.pubItemUse == 'image')
+        return new hb.SafeString('<img width="300" src="' + tempDir + '/' + el.pubItem + '">')
+    else
+        return new hb.SafeString("")
+  });
+
+// Link 
+hb.registerHelper('link', function(object) {
+    var el = object.data.root.mm[object.data.index]
+    if(el.pubItemUse != 'snippet')
+        return new hb.SafeString('<a target="__blank" href="' + tempDir + '/' + el.pubItem + '">' + el.pubItem + '</a>')
+    else
+        return new hb.SafeString(el.pubItem)
+  });
+
+
 // Load metamaster.json
 winston.info('Loading metamaster')
 loadJsonFile(tempDir + '/metamaster.json').then(_mm => {
@@ -18,7 +39,8 @@ loadJsonFile(tempDir + '/metamaster.json').then(_mm => {
         winston.info("Loaded metamaster.json")
         var html = fs.readFileSync('/Users/fmay/cheat/templates/listing.hbm', 'UTF8')
         var template = hb.compile(html);
-        var output = template(_mm);
+        var data = {mm: _mm, uses: util.validPubItemUseArray}
+        var output = template(data);
         fs.writeFileSync(tgtDir + '/ref.html', output)
         winston.info("Written ref.html")
     }
@@ -26,3 +48,5 @@ loadJsonFile(tempDir + '/metamaster.json').then(_mm => {
         winston.error("Error with metamaster.json")
     }
 });
+
+return

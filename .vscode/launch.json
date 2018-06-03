@@ -39,7 +39,14 @@
             "name": "ref.html",
             "program": "${workspaceFolder}/js/ref-table.js",
             "outputCapture": "std"
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Server",
+            "program": "${workspaceFolder}/js/server.js",
+            "outputCapture": "std"
+        }        
         
     ]
 }

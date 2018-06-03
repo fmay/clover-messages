@@ -51,7 +51,7 @@ function compile(mm) {
 			var obj = mm.find(function (obj) { return obj.rootName == name ; });
 			obj.h1 = h1
 			obj.h2 = h2
-			obj.text = txt
+			obj.text = data
 
 		}
 	}

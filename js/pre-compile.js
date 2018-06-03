@@ -6,13 +6,11 @@ const fs = require('fs')
 const writeJsonFile = require('write-json-file');
  
 // Validation settings
-var validStatusArray = ['current', 'archived', 'refresh']
-var validPubItemTypeArray = ['file', 'url', 'image', 'pdf']
-var validPubItemUseArray = ['doc', 'white paper', 'case study', 'presentation', 'video', 'webinar', 'one pager', 'pr', 'ebook', 'infosheet', 'snippet']
 var _validationError
 
 // Initialize logging
 winston.level='debug'
+winston.verbose(util.validStatusArray)
 
 // Cleanup and prepare
 winston.info("Cleaning up /temp and /dist ...")
@@ -54,10 +52,9 @@ function validateMetadata(data, dirName) {
 	tObj.rootName = obj.pubItem.substring(0, obj.pubItem.lastIndexOf('.'))
 	tObj.sectorTags = validateValue(obj.sectorTags, "string", [], "", "sectorTags")
 	tObj.desc = validateValue(obj.desc, "string", [], "undefined", "desc")
-	tObj.status = validateValue(obj.status, "string", validStatusArray, "undefined", "status")
+	tObj.status = validateValue(obj.status, "string", util.validStatusArray, "undefined", "status")
 	tObj.updated = validateValue(obj.updated, "string", [], "", "updated")
-	tObj.pubItemUse = validateValue(obj.pubItemUse, "string", validPubItemUseArray, "undefined", "pubItemUse")
-	tObj.pubItemType = validateValue(obj.pubItemType, "string", validPubItemTypeArray, "undefined", "pubItemType")
+	tObj.pubItemUse = validateValue(obj.pubItemUse, "string", util.validPubItemUseArray, "undefined", "pubItemUse")
 	tObj.pubItem = validateValue(obj.pubItem, "string", [], "undefined", "pubItem")
 	tObj.srcFileName = validateValue(obj.srcFileName, "string", [], "undefined", "srcFileName")
 	tObj.UCDomainTags = validateValue(obj.UCDomainTags, "string", [], "", "UCDomainTags")
@@ -70,11 +67,11 @@ function validateMetadata(data, dirName) {
 		if ( matches[i].includes('.md') ) {
 			tObj.mdSnippet = true
 			tObj.pubItemUse = 'snippet'
-			tObj.pubItem = tObj.pubItem.substring(0, tObj.pubItem.lastIndexOf('.')) + '.html'
 			var name = matches[i].substring(matches[i].lastIndexOf('/') + 1)
 			name = name.substring(0, name.lastIndexOf('.'))
 			tObj.srcFileName = name + '.md'
 			tObj.rootName = name
+			tObj.pubItem = '{{>' + name + '}}'
 			tObj.isTemplateComponent = true;
 			break
 		}
@@ -82,7 +79,15 @@ function validateMetadata(data, dirName) {
 	if(!tObj.mdSnippet) {
 		tObj.srcFileName = validateValue(obj.srcFileName, "string", [], "undefined", "srcFileName")	
 	}
-
+	if( tObj.pubItemUse == 'video' ) {
+		tObj.rootName = "YouTube"
+		tObj.pubItem = "YouTube"
+		tObj.text = obj.text
+		_validationError = false
+		if(tObj.pubItem===undefined || tObj.pubItem=="" || tObj.text===undefined || tObj.text =="" ) {
+			_validationError = true
+		}
+	}
 	if(_validationError) {
 		winston.error("Partially incorrect metadata")
 	}
@@ -139,7 +144,7 @@ function compileRest() {
 			});  
 		}
 		else { 
-			// Copy the pubItem file to /dist
+			// Copy the pubItem file to /temp
 			if(metaMaster[i].pubItem && metaMaster[i].pubItem!='undefined') {
 				// If a template master, then copy to /temp
 				if(metaMaster[i].isTemplateMaster) {
